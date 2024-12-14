@@ -100,3 +100,54 @@
 The Power and Evolution of Business
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiE-LbyXSiGnqakpufW4X8JQ7xe4YwJ2BYDw&s"
 Business is not merely the exchange of goods or services for money; it is the engine driving innovation, growth, and societal progress. At its core, business is about creating value—whether it’s through solving problems, fulfilling needs, or providing opportunities for others to thrive.>
+<form id="form">
+            <div class="data">
+          <div class="field">
+              <label for="name">Name:</label>
+              <input type="text" name="name" id="name" required>
+          </div>
+          <div class="field">
+              <label for="email">Email ID:</label>
+              <input type="email" name="email" id="email" required>
+          </div>
+          <div class="field">
+              <label for="subject">Subject:</label>
+              <input type="text" name="subject" id="subject" required>
+          </div>
+          <div class="field">
+              <label for="message">Message:</label>
+              <textarea name="message" id="message" required></textarea>
+          </div></div>
+          <button type="submit" id="button">
+           Send  <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser/dist/email.min.js"></script>
+        <script>
+        
+        emailjs.init('7l42bR6ys0ZTVgmKG');
+        
+        function sendEmail(event) {
+            event.preventDefault();
+        
+            const templateParams = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+            };
+        
+            emailjs.send('service_lul09mm', 'template_bz79ste', templateParams)
+                .then((response) => {
+                    console.log('Email sent successfully!', response.status, response.text);
+                    alert('Email sent successfully!');
+                    document.getElementById('form').reset(); 
+                }, (error) => {
+                    console.error('Failed to send email:', error);
+                    alert('Failed to send email. Please try again later.');
+                });
+        }
+        
+        document.getElementById('form').addEventListener('submit', sendEmail);
+        
+        </script>
